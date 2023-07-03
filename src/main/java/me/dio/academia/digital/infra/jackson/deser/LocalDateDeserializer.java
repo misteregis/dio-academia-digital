@@ -1,12 +1,13 @@
 package me.dio.academia.digital.infra.jackson.deser;
 
+import java.io.IOException;
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import me.dio.academia.digital.infra.utils.JavaTimeUtils;
 
-import java.io.IOException;
-import java.time.LocalDate;
+import me.dio.academia.digital.infra.utils.JavaTimeUtils;
 
 /**
  * @author Venilton Falvo Jr

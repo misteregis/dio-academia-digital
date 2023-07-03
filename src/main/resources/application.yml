@@ -1,17 +1,30 @@
-
 server.port: 8081
 
 spring:
+  config:
+    import: optional:file:env.properties
   datasource:
-    url: jdbc:postgresql://localhost:5432/academia?useTimezone=true&serverTimezone=UTC&useLegacyDate
-    username: cami
-    password: root
+    driverClassName: org.postgresql.Driver
+    url: ${DATABASE_URL}
   jpa:
-    show-sql: true
+    databasePlatform: org.hibernate.dialect.PostgreSQLDialect
+    showSql: true
     hibernate:
-      ddl-auto: update
-    properties:
-      hibernate.format_sql: true
+      ddlAuto: update
+  mvc:
+    pathmatch:
+      matchingStrategy: ant-path-matcher
+    throwExceptionIfNoHandlerFound: true
+  web:
+    resources:
+      addMappings: false
+  messages:
+    basename: messages
+
+server:
+  error:
+    includeMessage: always
+    includeBindingErrors: always
 
 logging:
   level:

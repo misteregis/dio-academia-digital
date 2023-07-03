@@ -1,54 +1,62 @@
 package me.dio.academia.digital.service.impl;
 
+import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.EntityNotFoundException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import me.dio.academia.digital.entity.Aluno;
 import me.dio.academia.digital.entity.Matricula;
 import me.dio.academia.digital.entity.form.MatriculaForm;
 import me.dio.academia.digital.repository.AlunoRepository;
 import me.dio.academia.digital.repository.MatriculaRepository;
 import me.dio.academia.digital.service.IMatriculaService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class MatriculaServiceImpl implements IMatriculaService {
 
-  @Autowired
-  private MatriculaRepository matriculaRepository;
+    @Autowired
+    private MatriculaRepository matriculaRepository;
 
-  @Autowired
-  private AlunoRepository alunoRepository;
+    @Autowired
+    private AlunoRepository alunoRepository;
 
-  @Override
-  public Matricula create(MatriculaForm form) {
-    Matricula matricula = new Matricula();
-    Aluno aluno = alunoRepository.findById(form.getAlunoId()).get();
+    @Override
+    public Matricula create(MatriculaForm form) {
+        Long id = form.getAlunoId();
+        Matricula matricula = new Matricula();
+        Optional<Aluno> aluno = alunoRepository.findById(id);
 
-    matricula.setAluno(aluno);
+        if (aluno.isEmpty()) {
+            throw new EntityNotFoundException("Usu\u00E1rio n\u00E3o encontrado com ID: " + id);
+        }
 
-    return matriculaRepository.save(matricula);
-  }
+        matricula.setAluno(aluno.get());
 
-  @Override
-  public Matricula get(Long id) {
-    return matriculaRepository.findById(id).get();
-  }
-
-  @Override
-  public List<Matricula> getAll(String bairro) {
-
-    if(bairro == null){
-      return matriculaRepository.findAll();
-    }else{
-      return matriculaRepository.findAlunosMatriculadosBairro(bairro);
+        return matriculaRepository.save(matricula);
     }
 
-  }
+    @Override
+    public Matricula get(Long id) {
+        return matriculaRepository.findById(id).get();
+    }
 
-  @Override
-  public void delete(Long id) {}
+    @Override
+    public List<Matricula> getAll(String bairro) {
 
+        if (bairro == null) {
+            return matriculaRepository.findAll();
+        } else {
+            return matriculaRepository.findAlunosMatriculadosBairro(bairro);
+        }
 
+    }
+
+    @Override
+    public void delete(Long id) {
+    }
 
 }
