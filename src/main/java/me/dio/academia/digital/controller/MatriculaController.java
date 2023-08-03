@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import me.dio.academia.digital.entity.Matricula;
 import me.dio.academia.digital.entity.form.MatriculaForm;
 import me.dio.academia.digital.service.impl.MatriculaServiceImpl;
 
 @RestController
+@Api(tags = "Matrícula")
 @RequestMapping(value = "/api/v1/matriculas", produces = "application/json")
 public class MatriculaController {
 

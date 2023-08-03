@@ -24,7 +24,7 @@ public class AlunoForm {
     private String nome;
 
     @NotEmpty(message = "Por favor, informe seu CPF.")
-    @CPF(message = "'${validatedValue}' é um CPF inválido!")
+    @CPF(message = "'${validatedValue}' não é um CPF válido!")
     private String cpf;
 
     @NotEmpty(message = "Por favor, informe um bairro")

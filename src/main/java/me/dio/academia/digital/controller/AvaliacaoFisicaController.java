@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import me.dio.academia.digital.entity.AvaliacaoFisica;
 import me.dio.academia.digital.entity.form.AvaliacaoFisicaForm;
 import me.dio.academia.digital.service.impl.AvaliacaoFisicaServiceImpl;
 
 @RestController
+@Api(tags = "Avaliação")
 @RequestMapping(value = "/api/v1/avaliacoes", produces = "application/json")
 public class AvaliacaoFisicaController {
 
