@@ -19,12 +19,13 @@ public class SwaggerConfig {
     private static final String API_TITLE = "API RESTful Academia";
     private static final String API_DESCRIPTION = "API RESTful modelando sistema de academia de ginástica";
     private static final String CONTACT_NAME = "Reginaldo Izid\u00F3rio";
-    private static final String CONTACT_GITHUB = "https://gtihub.com/misteregis";
+    private static final String CONTACT_GITHUB = "https://github.com/misteregis";
     private static final String CONTACT_EMAIL = "misteregis@gmail.com";
 
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("v1")
                 .select()
                 .apis(basePackage(BASE_PACKAGE))
                 .paths(PathSelectors.any())
